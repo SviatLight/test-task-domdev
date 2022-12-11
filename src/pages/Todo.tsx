@@ -15,7 +15,7 @@ const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 
 
 const Todo = () => {
   const { data: todos, isLoading: isLoadingTodos, isError: isErrorTodos } = useGetTodosQuery();
-  const [addTodo, {}] = useAddTodoMutation();
+  const [addTodo] = useAddTodoMutation();
   const [updateTodo] = useUpdateTodoMutation();
   const [deleteTodo] = useDeleteTodoMutation();
 
