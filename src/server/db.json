@@ -1,0 +1,29 @@
+{
+  "todos": [
+    {
+      "task": "study redux",
+      "id": 2,
+      "status": true
+    },
+    {
+      "task": "study react",
+      "id": 3,
+      "status": true
+    },
+    {
+      "task": "homework",
+      "id": 4,
+      "status": false
+    },
+    {
+      "task": "go to the shop",
+      "id": 7,
+      "status": true
+    },
+    {
+      "task": "study angular",
+      "status": false,
+      "id": 8
+    }
+  ]
+}
