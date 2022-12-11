@@ -1,10 +1,10 @@
 import React from 'react';
 
-type ButtonProps = {
+interface ButtonProps {
   className: string;
   text: string;
   onClick: () => void;
-};
+}
 
 const Button: React.FC<ButtonProps> = ({ className, text, onClick }) => {
   return (

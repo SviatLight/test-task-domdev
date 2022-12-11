@@ -4,13 +4,10 @@ import Edit from '../../assets/img/edit.png';
 import { useUpdateTodoMutation } from '../../redux/todosAPI';
 import { ITodo } from '../../types/ITodo';
 
-type TodoItemProps = {
-  task: string;
-  id: number;
-  status: boolean;
+interface TodoItemProps extends ITodo {
   changeTodo: ({ task, id, status }: ITodo) => void;
   deleteTodoItem: (id: number) => void;
-};
+}
 
 const TodoItem: React.FC<TodoItemProps> = ({ task, id, status, changeTodo, deleteTodoItem }) => {
   const [updateTodo] = useUpdateTodoMutation();

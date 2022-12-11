@@ -11,7 +11,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import Button from '../components/Button';
 import { ITodo } from '../types/ITodo';
 
-const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const days: string[] = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
 
 const Todo = () => {
   const { data: todos, isLoading: isLoadingTodos, isError: isErrorTodos } = useGetTodosQuery();
