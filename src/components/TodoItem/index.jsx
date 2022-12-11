@@ -7,11 +7,7 @@ const TodoItem = ({ task, id, status, changeTodo, deleteTodoItem }) => {
   const [updateTodo] = useUpdateTodoMutation();
 
   const onChangeCheckbox = ({ target: { checked } }) => {
-    if (checked === true) {
-      updateTodo({ task, id, status: true });
-    } else {
-      updateTodo({ task, id, status: false });
-    }
+    updateTodo({ task, id, status: checked });
   };
 
   return (

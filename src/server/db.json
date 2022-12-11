@@ -22,8 +22,8 @@
     },
     {
       "task": "study angular",
-      "status": false,
-      "id": 8
+      "id": 8,
+      "status": false
     }
   ]
 }

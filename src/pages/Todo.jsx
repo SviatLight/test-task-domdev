@@ -31,44 +31,24 @@ const Todo = () => {
     setTodoState(todoItem);
   };
 
-  const addTodoItem = () => {
+  const updateTodoList = (todoAction, toastText, setMode) => {
     if (!todoState.task) {
       toast.error('Your task field is empty!', {
         closeOnClick: true,
         theme: 'light',
       });
-    } else {
-      addTodo(todoState);
-      setTodoState({
-        task: '',
-        status: false,
-      });
-      toast.success('Your task added success!', {
-        closeOnClick: true,
-        theme: 'light',
-      });
+      return;
     }
-  };
-
-  const updateTodoItem = () => {
-    if (!todoState.task) {
-      toast.error('Your task field is empty!', {
-        closeOnClick: true,
-        theme: 'light',
-      });
-    } else {
-      updateTodo(todoState);
-      setMode(true);
-      setTodoState({
-        task: '',
-        status: false,
-      });
-
-      toast.success('Your task updated success!', {
-        closeOnClick: true,
-        theme: 'light',
-      });
-    }
+    todoAction(todoState);
+    setMode?.(true);
+    setTodoState({
+      task: '',
+      status: false,
+    });
+    toast.success(`${toastText}`, {
+      closeOnClick: true,
+      theme: 'light',
+    });
   };
 
   const deleteTodoItem = (id) => {
@@ -116,9 +96,17 @@ const Todo = () => {
             }
           />
           {mode ? (
-            <Button btnClass="bg-[#3da2c3]" text="Add new task" func={addTodoItem} />
+            <Button
+              className="bg-[#3da2c3]"
+              text="Add new task"
+              onClick={() => updateTodoList(addTodo, 'Your task added success!')}
+            />
           ) : (
-            <Button btnClass="bg-[#58c33d]" text="Edit task" func={updateTodoItem} />
+            <Button
+              className="bg-[#58c33d]"
+              text="Edit task"
+              onClick={() => updateTodoList(updateTodo, 'Your task updated success!', setMode)}
+            />
           )}
         </div>
       </div>
