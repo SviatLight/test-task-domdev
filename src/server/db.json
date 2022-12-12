@@ -19,11 +19,6 @@
       "task": "go to the shop",
       "id": 7,
       "status": true
-    },
-    {
-      "task": "study angular",
-      "id": 8,
-      "status": false
     }
   ]
 }

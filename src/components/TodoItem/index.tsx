@@ -2,11 +2,17 @@ import React from 'react';
 import Delete from '../../assets/img/delete.png';
 import Edit from '../../assets/img/edit.png';
 import { useUpdateTodoMutation } from '../../redux/todosAPI';
+import { ITodo } from '../../types/ITodo';
 
-const TodoItem = ({ task, id, status, changeTodo, deleteTodoItem }) => {
+interface TodoItemProps extends ITodo {
+  changeTodo: ({ task, id, status }: ITodo) => void;
+  deleteTodoItem: (id: number) => void;
+}
+
+const TodoItem: React.FC<TodoItemProps> = ({ task, id, status, changeTodo, deleteTodoItem }) => {
   const [updateTodo] = useUpdateTodoMutation();
 
-  const onChangeCheckbox = ({ target: { checked } }) => {
+  const onChangeCheckbox = ({ target: { checked } }: React.ChangeEvent<HTMLInputElement>) => {
     updateTodo({ task, id, status: checked });
   };
 

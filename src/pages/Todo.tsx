@@ -9,8 +9,17 @@ import {
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Button from '../components/Button';
+import { ITodo } from '../types/ITodo';
 
-const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const days: string[] = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
 
 const Todo = () => {
   const { data: todos, isLoading: isLoadingTodos, isError: isErrorTodos } = useGetTodosQuery();
@@ -18,7 +27,8 @@ const Todo = () => {
   const [updateTodo] = useUpdateTodoMutation();
   const [deleteTodo] = useDeleteTodoMutation();
 
-  const [todoState, setTodoState] = useState({
+  const [todoState, setTodoState] = useState<ITodo>({
+    id: 0,
     task: '',
     status: false,
   });
@@ -26,12 +36,12 @@ const Todo = () => {
   const date = new Date();
   const day = date.getDay();
 
-  const changeTodo = (todoItem) => {
+  const changeTodo = (todoItem: ITodo) => {
     setMode(false);
     setTodoState(todoItem);
   };
 
-  const updateTodoList = (todoAction, toastText, setMode) => {
+  const updateTodoList = (todoAction: (todoState: ITodo) => void, toastText: string) => {
     if (!todoState.task) {
       toast.error('Your task field is empty!', {
         closeOnClick: true,
@@ -42,6 +52,7 @@ const Todo = () => {
     todoAction(todoState);
     setMode?.(true);
     setTodoState({
+      id: 0,
       task: '',
       status: false,
     });
@@ -51,7 +62,7 @@ const Todo = () => {
     });
   };
 
-  const deleteTodoItem = (id) => {
+  const deleteTodoItem = (id: number) => {
     deleteTodo(id);
     toast.success('Your task deleted success!', {
       closeOnClick: true,
@@ -70,7 +81,8 @@ const Todo = () => {
         <p>{days[day]}</p>
         <div className="my-[44px] h-[215px] overflow-scroll scroll-hide">
           {!isLoadingTodos ? (
-            todos.map((item) => (
+            todos?.length &&
+            todos.map((item: ITodo) => (
               <TodoItem
                 key={item.id}
                 {...item}
@@ -98,15 +110,17 @@ const Todo = () => {
           {mode ? (
             <Button
               className="bg-[#3da2c3]"
-              text="Add new task"
               onClick={() => updateTodoList(addTodo, 'Your task added success!')}
-            />
+            >
+              Add new task
+            </Button>
           ) : (
             <Button
               className="bg-[#58c33d]"
-              text="Edit task"
-              onClick={() => updateTodoList(updateTodo, 'Your task updated success!', setMode)}
-            />
+              onClick={() => updateTodoList(updateTodo, 'Your task updated success!')}
+            >
+              Edit task
+            </Button>
           )}
         </div>
       </div>
