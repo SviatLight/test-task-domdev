@@ -32,7 +32,7 @@ const Todo = () => {
     task: '',
     status: false,
   });
-  const [mode, setMode] = useState<boolean>(true);
+  const [mode, setMode] = useState(true);
   const date = new Date();
   const day = date.getDay();
 
@@ -81,7 +81,7 @@ const Todo = () => {
         <p>{days[day]}</p>
         <div className="my-[44px] h-[215px] overflow-scroll scroll-hide">
           {!isLoadingTodos ? (
-            todos &&
+            todos?.length &&
             todos.map((item: ITodo) => (
               <TodoItem
                 key={item.id}
@@ -110,15 +110,17 @@ const Todo = () => {
           {mode ? (
             <Button
               className="bg-[#3da2c3]"
-              text="Add new task"
               onClick={() => updateTodoList(addTodo, 'Your task added success!')}
-            />
+            >
+              Add new task
+            </Button>
           ) : (
             <Button
               className="bg-[#58c33d]"
-              text="Edit task"
               onClick={() => updateTodoList(updateTodo, 'Your task updated success!')}
-            />
+            >
+              Edit task
+            </Button>
           )}
         </div>
       </div>

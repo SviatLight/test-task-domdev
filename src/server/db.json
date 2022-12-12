@@ -18,11 +18,6 @@
     {
       "task": "go to the shop",
       "id": 7,
-      "status": false
-    },
-    {
-      "task": "study angular",
-      "id": 8,
       "status": true
     }
   ]
